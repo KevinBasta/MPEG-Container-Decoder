@@ -137,7 +137,6 @@ void freeDisplayTimeToSampleTable(displayTimeToSampleTable *data) {
 }
 
 void freeMpegData(MPEG_Data *videoData) {
-    freeTopBoxesLL                          (videoData->topBoxesLL);
     freeElstTable                           (videoData->elstTable);
     freeDataRefTable                        (videoData->dataReferenceTable);
     freeTimeToSampleTableCompressed         (videoData->timeToSampleTableCompressed);
@@ -149,6 +148,7 @@ void freeMpegData(MPEG_Data *videoData) {
     freeCompositionOffsetTableCompressed    (videoData->compositionOffsetTableCompressed);
     freeCompositionOffsetTable              (videoData->compositionOffsetTable);
     freeDisplayTimeToSampleTable            (videoData->displayTimeToSampleTable);
+    freeBox(videoData->mdatBox);
 
     free(videoData);
 }

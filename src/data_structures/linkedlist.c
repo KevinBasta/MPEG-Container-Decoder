@@ -43,11 +43,6 @@ void linkedlistAppendNode(linkedList *list, void *item) {
     list->size += 1;
 }
 
-
-// may not be needed
-// void removeNode(linkedList *linkedList, void *)
-
-
 /**
  * @brief set last node's nextNode to null
  * @param *list     -   the linkedList affected  
@@ -181,6 +176,31 @@ Node *freeBoxNode(Node *nodeStruct) {
     return nextNode;
 }
 
+void freeBoxLinkedListExclude(linkedList *list, char excludedType[]) {
+    Node *currentNode = list->head;
+
+    // stopping right before last element to avoid 
+    // attempting to free a NULL created by linkedlistNullifyLastNode
+
+
+    for (u32 i = 0; i < list->size - 1; i++) {
+            if (strncmp(excludedType, ((box*) currentNode->currentItem)->boxType, strlen(excludedType)) != 0) {
+                currentNode = freeBoxNode(currentNode);
+            } else {
+                currentNode = currentNode->nextNode;
+            }
+            // DEBUG printf("%d %d\n", currentNode, currentNode->nextNode);
+            list->head = currentNode;
+    }
+
+    // freeing the last node
+    if (strncmp(excludedType, ((box*) currentNode->currentItem)->boxType, strlen(excludedType)) != 0) {
+        freeBox(currentNode->currentItem);
+    }
+
+    free(currentNode);
+    free(list);
+}
 
 /**
  * @brief free all nodes in a linkedList

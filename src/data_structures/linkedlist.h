@@ -45,5 +45,6 @@ box *linkedlistGetBox(linkedList *list, u8 boxReturnType[]);
 void freeBox(box *boxStruct);
 Node *freeBoxNode(Node *nodeStruct);
 void freeLinkedList(linkedList *list, char type[]);
+void freeBoxLinkedListExclude(linkedList *list, char excludedType[]);
 
 #endif // LINKED_LIST_H

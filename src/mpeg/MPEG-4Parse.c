@@ -30,8 +30,6 @@ MPEG_Data *getMpegData(char *fileName) {
     // MDAT
     videoData->mdatBox = linkedlistGetBox(topBoxesLL, "mdat");
     videoData->mdatDataOffsetInFile = linkedlistGetOffsetToBox(topBoxesLL, "mdat") + BOX_HEADER_SIZE;
-    //videoData->topBoxesLL = topBoxesLL;
-
 
     printf("----------MOOV LEVEL----------\n");
     box *moovBox = linkedlistGetBox(topBoxesLL, "moov");
@@ -131,7 +129,7 @@ MPEG_Data *getMpegData(char *fileName) {
     freeLinkedList(mdiaLL, "box");
     freeLinkedList(minfLL, "box");
     freeLinkedList(stblLL, "box");
-    videoData->topBoxesLL = topBoxesLL; // for later freeing
+    freeBoxLinkedListExclude(topBoxesLL, "mdat"); // for later freeing
 
     return videoData;
 }

@@ -38,9 +38,6 @@ typedef struct sampleInfo {
  *
  */
 typedef struct MPEG_Data {
-    // 
-    linkedList *topBoxesLL;
-
     // from mvhdParseBox
     u32 mvhdTimeScale; 
     u32 mvhdDuration;
